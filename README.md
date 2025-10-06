@@ -20,7 +20,7 @@ creados, en este caso el nombre que se le asignó a nuestro contenedor fue **mod
 ## 3º Parte
 ![3º_CrearContenedorNombre.png](SXE_Fotos_03/3º_CrearContenedorNombre.png)
 
-Para crear un contenedor con nombre podemos usar el mismo comando anterior pero añadiendo la opción `--name <nombre>`
+Para crear un contenedor con nombre podemos usar el mismo comando anterior pero añadiendo la opción de `--name <nombre>`
 antes de la imagen para indicarle un nombre específico. 
 
 En este caso, alpine tiene un problema y es que es muy probable
