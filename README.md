@@ -1,77 +1,208 @@
-# SXE_Tarea3
+# SXE_Tarea3: Uso Básico de Docker
 
-## 1º Parte
+---
+
+## 1. Descargar una Imagen
 
 ![1º.png](SXE_Fotos_03/1º.png)
 
-Para descargar una imagen sin hacer nada más podemos usar el comando `docker pull <Imagen>`
-sustituyendo la imagen por el nombre de la imagen que queremos, en este caso, alpine.
+Para descargar una imagen sin hacer nada más, podemos usar el siguiente comando:
 
-Para comprobar que se descargó correctamente con `docker image ls` muestra todas las imágenes descargadas.
+```bash
+docker pull alpine
+```
 
-## 2º Parte
+Esto descargará la imagen `alpine` desde Docker Hub.
+
+Una vez descargada, para comprobar que la imagen se encuentra en el sistema, se puede usar el comando:
+
+```bash
+docker image ls
+```
+
+Este comando mostrará todas las imágenes descargadas localmente.
+
+---
+
+## 2. Crear un Contenedor sin Ejecutarlo
 
 ![2ºA.png](SXE_Fotos_03/2ºA.png)
 
-Para crear un contenedor sin ejecutarlo se usa el comando `docker create <Imagen>`, en este caso alpine.
-Para comprobar el nombre se puede usar el comando `docker ps -a` para mostrar todos los contenedores
-creados, en este caso el nombre que se le asignó a nuestro contenedor fue **modest_merkle**.
+Para crear un contenedor a partir de la imagen descargada, sin ejecutarlo, usamos:
 
-## 3º Parte
+```bash
+docker create alpine
+```
+
+Este comando solo crea el contenedor, pero no lo inicia.
+
+Para comprobar que se ha creado correctamente, podemos usar:
+
+```bash
+docker ps -a
+```
+
+Este comando lista todos los contenedores, incluidos los que están detenidos.  
+En este caso, Docker asignó automáticamente el nombre **modest_merkle** al contenedor creado.
+
+---
+
+## 3. Crear un Contenedor con Nombre
+
 ![3º_CrearContenedorNombre.png](SXE_Fotos_03/3º_CrearContenedorNombre.png)
 
-Para crear un contenedor con nombre podemos usar el mismo comando anterior pero añadiendo el parámetro siguiente `--name <nombre>`
-antes de la imagen para indicarle un nombre específico. 
+Para crear un contenedor con un nombre específico, utilizamos el mismo comando que antes pero añadiendo la opción `--name`:
 
-En este caso, alpine tiene un problema y es que es muy probable
-que si creas el contenedor, cuando lo intentes ejecutar se cierre automáticamente porque el proceso principal acaba muy rápido,
-asi que aquí también tendremos que agregar algún elemento que retrase su cierre, en mi caso `-it`.
+```bash
+docker create --name dam_alp1 -it alpine
+```
 
-Y como se puede ver ahora hay un contenedor creado con el nombre que pusimos.
+> Alpine no ejecuta ningún proceso por defecto. Por lo tanto, al iniciar un contenedor basado en esta imagen, se cerrará automáticamente si no se le indica que mantenga la terminal abierta.  
+> Por eso, también se añaden las opciones `-it` al momento de crear el contenedor, lo cual permite una sesión interactiva y evita que se cierre inmediatamente.
+
+Después de ejecutar el comando, el contenedor quedará creado con el nombre que se haya especificado.
+
+---
+
+### Iniciar y Acceder al Contenedor
 
 ![4º_Acceder.png](SXE_Fotos_03/4º_Acceder.png)
 
-Si hicimos todo bien, para acceder a él solo tendremos que usar `docker start <nombre-contenedor>` para que se active, como se puede ver en el **STATUS UP**. Una vez activo el contenedor
-podremos usar `exec -it <nombre-contenedor> sh` entraremos directamente en la terminal de alpine.
+Para iniciar el contenedor creado anteriormente y acceder a su terminal:
 
-## 4º Parte
+1. Iniciar el contenedor con el comando:
+
+```bash
+docker start dam_alp1
+```
+
+Si el contenedor se ha iniciado correctamente, en la columna STATUS aparecerá **UP**.
+
+2. Acceder a su terminal utilizando:
+
+```bash
+docker exec -it dam_alp1 sh
+```
+
+Esto abrirá una terminal interactiva dentro del contenedor `alpine`.
+
+---
+
+## 4. Ver la IP del Contenedor y Hacer Ping
+
 ![5º_IpYPing.png](SXE_Fotos_03/5º_IpYPing.png)
 
-Dentro de la terminal podemos usar `ip a` para ver la ip del contenedor, en este caso *172.17.0.2* y también
-podemos hacer ping con google con `ping google.com`.
+Una vez dentro del contenedor, se pueden realizar dos acciones:
 
-## 5º Parte
+1. Ver la IP del contenedor con el comando:
+
+```bash
+ip a
+```
+
+En este caso, se muestra la IP `172.17.0.2`.
+
+2. Comprobar la conectividad a internet haciendo ping a Google:
+
+```bash
+ping google.com
+```
+
+Esto permite verificar que el contenedor tiene acceso a la red externa.
+
+---
+
+## 5. Crear y Acceder a un Segundo Contenedor
 
 ![6ºCrear_Y_Aceder_Contenedor2.png](SXE_Fotos_03/6ºCrear_Y_Aceder_Contenedor2.png)
 
-De la misma manera que creamos el anterior contenedor crearemos otro nuevo y lo ejecutaremos siguiendo los pasos anteriores.
+Se repite el proceso anterior para crear y acceder a un segundo contenedor `alpine`.
+
+1. Crear el contenedor con nombre y opciones interactivas:
+
+```bash
+docker create --name dam_alp2 -it alpine
+```
+
+2. Iniciarlo y acceder a su terminal con:
+
+```bash
+docker start dam_alp2
+docker exec -it dam_alp2 sh
+```
+
+---
+
+### Ver la IP del Segundo Contenedor y Hacer Ping al Primero
 
 ![7ºIP2_Y_Ping2->1.png](SXE_Fotos_03/7ºIP2_Y_Ping2_1.png)
 
-Una vez en la terminal podemos buscar la IP de este contenedor y hacer ping entre los contenedores al saber la IP del anterior
-con `ping 172.17.0.2` y veremos que efectivamente se pueden conectar los dos contenedores.
+Desde la terminal del segundo contenedor:
 
-## 6º Parte
+1. Ver su dirección IP con:
+
+```bash
+ip a
+```
+
+2. Usar la IP obtenida anteriormente del primer contenedor para hacer ping:
+
+```bash
+ping 172.17.0.2
+```
+
+Esto demuestra que los dos contenedores pueden conectarse entre sí a través de la red de Docker.
+
+---
+
+## 6. Salir del Contenedor y Verificar su Estado
 
 ![8ºSalirTerminalYEstado.png](SXE_Fotos_03/8ºSalirTerminalYEstado.png)
 
-Para salir de la terminal simplemente podemos escribir `exit` en la terminal de alpine y nos dejará salir.
+Para salir de la terminal del contenedor:
 
-Si comprobamos ahora el estado de los contenedores podremos ver que ninguno de ellos se detuvo.
+```bash
+exit
+```
 
-## 7º Parte
+Esto nos devuelve al sistema anfitrión.
+
+Luego, se puede comprobar el estado de los contenedores con:
+
+```bash
+docker ps -a
+```
+
+En este caso, aunque se haya salido de la terminal, los contenedores siguen en ejecución si no se han detenido manualmente.
+
+---
+
+## 7. Ver el Espacio Ocupado por Docker
 
 ![9ºEspacioEnMemoria.png](SXE_Fotos_03/9ºEspacioEnMemoria.png)
 
-Con el comando `docker system df` podremos ver la memoria en el disco duro que usa docker.
-Como previamente ya había hecho cosas antes en docker puede que tenga más memoria usada de la que se usaría para estos pasos.
+Con el siguiente comando se puede ver cuánto espacio ocupa Docker en el disco duro:
 
-## 8º Parte
+```bash
+docker system df
+```
+
+El resultado muestra el espacio utilizado por imágenes, contenedores, volúmenes y cachés.
+
+Nota: Ya se han hecho otras tareas con Docker anteriormente por lo que la memoria usada es mayor que la esperada solo por estos pasos.
+
+---
+
+## 8. Ver el Uso de Memoria RAM
 
 ![11ºComandoRAM.png](SXE_Fotos_03/11ºComandoRAM.png)
 
-Con el comando `docker stats` podemos ver, entre otras cosas, la memoria RAM que usa docker.
+Para ver el uso de recursos (como CPU y memoria RAM) en tiempo real por cada contenedor, se utiliza:
+
+```bash
+docker stats
+```
 
 ![10ºRam.png](SXE_Fotos_03/10ºRam.png)
 
-Ahora podemos ver que cada uno de los contenedores ocupa aproximadamente unos 700 KiB de memoria RAM.
+En este caso, se observa que cada contenedor ocupa aproximadamente **700 KiB de RAM**.
