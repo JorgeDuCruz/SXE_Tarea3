@@ -33,3 +33,10 @@ Y como se puede ver ahora hay un contenedor creado con el nombre que pusimos.
 
 Si hicimos todo bien, para acceder a él solo tendremos que usar `docker start <nombre-contenedor>` para que se active, como se puede ver en el **STATUS UP**. Una vez activo el contenedor
 podremos usar `exec -it <nombre-contenedor> sh` entraremos directamente en la terminal de alpine.
+
+## 4º Parte
+![5º_IpYPing.png](SXE_Fotos_03/5º_IpYPing.png)
+
+Dentro de la terminal podemos usar `ip a` para ver la ip del contenedor, en este caso *172.17.0.2* y también
+podemos hacer ping con google con `ping google.com`.
+
