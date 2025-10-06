@@ -54,7 +54,7 @@ En este caso, Docker asignó automáticamente el nombre **modest_merkle** al con
 Para crear un contenedor con un nombre específico, utilizamos el mismo comando que antes pero añadiendo la opción `--name`:
 
 ```bash
-docker create --name <nombre> -it alpine
+docker create --name dam_alp1 -it alpine
 ```
 
 > Alpine no ejecuta ningún proceso por defecto. Por lo tanto, al iniciar un contenedor basado en esta imagen, se cerrará automáticamente si no se le indica que mantenga la terminal abierta.  
@@ -73,7 +73,7 @@ Para iniciar el contenedor creado anteriormente y acceder a su terminal:
 1. Iniciar el contenedor con el comando:
 
 ```bash
-docker start <nombre-contenedor>
+docker start dam_alp1
 ```
 
 Si el contenedor se ha iniciado correctamente, en la columna STATUS aparecerá **UP**.
@@ -81,7 +81,7 @@ Si el contenedor se ha iniciado correctamente, en la columna STATUS aparecerá *
 2. Acceder a su terminal utilizando:
 
 ```bash
-docker exec -it <nombre-contenedor> sh
+docker exec -it dam_alp1 sh
 ```
 
 Esto abrirá una terminal interactiva dentro del contenedor `alpine`.
@@ -121,14 +121,14 @@ Se repite el proceso anterior para crear y acceder a un segundo contenedor `alpi
 1. Crear el contenedor con nombre y opciones interactivas:
 
 ```bash
-docker create --name <nombre2> -it alpine
+docker create --name dam_alp2 -it alpine
 ```
 
 2. Iniciarlo y acceder a su terminal con:
 
 ```bash
-docker start <nombre2>
-docker exec -it <nombre2> sh
+docker start dam_alp2
+docker exec -it dam_alp2 sh
 ```
 
 ---
@@ -189,7 +189,7 @@ docker system df
 
 El resultado muestra el espacio utilizado por imágenes, contenedores, volúmenes y cachés.
 
-Nota: Si ya se han hecho otras tareas con Docker anteriormente, la memoria usada podría ser mayor que la esperada solo por estos pasos.
+Nota: Ya se han hecho otras tareas con Docker anteriormente por lo que la memoria usada es mayor que la esperada solo por estos pasos.
 
 ---
 
