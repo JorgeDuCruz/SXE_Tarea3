@@ -40,3 +40,14 @@ podremos usar `exec -it <nombre-contenedor> sh` entraremos directamente en la te
 Dentro de la terminal podemos usar `ip a` para ver la ip del contenedor, en este caso *172.17.0.2* y también
 podemos hacer ping con google con `ping google.com`.
 
+## 5º Parte
+
+![6ºCrear_Y_Aceder_Contenedor2.png](SXE_Fotos_03/6ºCrear_Y_Aceder_Contenedor2.png)
+
+De la misma manera que creamos el anterior contenedor crearemos otro nuevo y lo ejecutaremos siguiendo los pasos anteriores.
+
+![7ºIP2_Y_Ping2->1.png](SXE_Fotos_03/7ºIP2_Y_Ping2_1.png)
+
+Una vez en la terminal podemos buscar la IP de este contenedor y hacer ping entre los contenedores al saber la IP del anterior
+con `ping 172.17.0.2` y veremos que efectivamente se pueden conectar los dos contenedores.
+
