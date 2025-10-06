@@ -51,3 +51,10 @@ De la misma manera que creamos el anterior contenedor crearemos otro nuevo y lo 
 Una vez en la terminal podemos buscar la IP de este contenedor y hacer ping entre los contenedores al saber la IP del anterior
 con `ping 172.17.0.2` y veremos que efectivamente se pueden conectar los dos contenedores.
 
+## 6º Parte
+
+![8ºSalirTerminalYEstado.png](SXE_Fotos_03/8ºSalirTerminalYEstado.png)
+
+Para salir de la terminal simplemente podemos escribir `exit` en la terminal de alpine y nos dejará salir.
+
+Si comprobamos ahora el estado de los contenedores podremos ver que ninguno de ellos se detuvo.
