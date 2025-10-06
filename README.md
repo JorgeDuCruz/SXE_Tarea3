@@ -65,3 +65,13 @@ Si comprobamos ahora el estado de los contenedores podremos ver que ninguno de e
 
 Con el comando `docker system df` podremos ver la memoria en el disco duro que usa docker.
 Como previamente ya había hecho cosas antes en docker puede que tenga más memoria usada de la que se usaría para estos pasos.
+
+## 8º Parte
+
+![11ºComandoRAM.png](SXE_Fotos_03/11ºComandoRAM.png)
+
+Con el comando `docker stats` podemos ver, entre otras cosas, la memoria RAM que usa docker.
+
+![10ºRam.png](SXE_Fotos_03/10ºRam.png)
+
+Ahora podemos ver que cada uno de los contenedores ocupa aproximadamente unos 700 KiB de memoria RAM.
