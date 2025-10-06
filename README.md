@@ -58,3 +58,10 @@ con `ping 172.17.0.2` y veremos que efectivamente se pueden conectar los dos con
 Para salir de la terminal simplemente podemos escribir `exit` en la terminal de alpine y nos dejará salir.
 
 Si comprobamos ahora el estado de los contenedores podremos ver que ninguno de ellos se detuvo.
+
+## 7º Parte
+
+![9ºEspacioEnMemoria.png](SXE_Fotos_03/9ºEspacioEnMemoria.png)
+
+Con el comando `docker system df` podremos ver la memoria en el disco duro que usa docker.
+Como previamente ya había hecho cosas antes en docker puede que tenga más memoria usada de la que se usaría para estos pasos.
